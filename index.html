@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام الدفع - دكان حلال</title>
+    <style>
+        /* تنسيقات الصفحة */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            color: #333;
+        }
+        input {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            border-radius: 10px;
+        }
+        #popup button {
+            width: 100px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>نظام الدفع - دكان حلال</h2>
+    
+    <!-- نموذج الدفع -->
+    <div id="payment-form">
+        <input type="text" id="name" placeholder="اسمك" required>
+        <input type="email" id="email" placeholder="بريدك الإلكتروني" required>
+        <input type="text" id="card-number" placeholder="رقم البطاقة" required>
+        <input type="text" id="expiration" placeholder="تاريخ انتهاء البطاقة (MM/YY)" required>
+        <input type="text" id="cvv" placeholder="CVV" required>
+        <button id="pay-button">ادفع الآن</button>
+    </div>
+    
+    <!-- النافذة المنبثقة -->
+    <div id="popup">
+        <p id="thank-you-message"></p>
+        <p>اختر أحد الخيارات التالية:</p>
+        <button id="retry-button">إعادة المحاولة</button>
+        <button id="home-button">العودة إلى الشاشة الرئيسية</button>
+    </div>
+</div>
+
+<script>
+    // حدث زر "ادفع الآن"
+    document.getElementById("pay-button").addEventListener("click", function() {
+        var name = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        var cardNumber = document.getElementById("card-number").value;
+        var expiration = document.getElementById("expiration").value;
+        var cvv = document.getElementById("cvv").value;
+
+        // التحقق من المدخلات
+        if (name && email && cardNumber && expiration && cvv) {
+            // إظهار رسالة الشكر
+            document.getElementById("thank-you-message").innerText = "شكراً، الطلبية على وشك القدوم.";
+            // إظهار النافذة المنبثقة بعد الدفع
+            document.getElementById("popup").style.display = "block";
+            document.getElementById("payment-form").style.display = "none";
+        } else {
+            alert("الرجاء إدخال جميع المعلومات المطلوبة.");
+        }
+    });
+
+    // حدث زر "إعادة المحاولة"
+    document.getElementById("retry-button").addEventListener("click", function() {
+        // إعادة تعيين العرض لإعادة المحاولة
+        document.getElementById("popup").style.display = "none";
+        document.getElementById("payment-form").style.display = "block";
+        document.getElementById("name").value = '';
+        document.getElementById("email").value = '';
+        document.getElementById("card-number").value = '';
+        document.getElementById("expiration").value = '';
+        document.getElementById("cvv").value = '';
+    });
+
+    // حدث زر "العودة إلى الشاشة الرئيسية"
+    document.getElementById("home-button").addEventListener("click", function() {
+        window.location.href = "https://redete22.github.io/halalsupermarket/"; // تأكد من أن لديك ملف index.html للصفحة الرئيسية
+    });
+</script>
+
+</body>
+</html>
